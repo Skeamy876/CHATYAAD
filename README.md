@@ -27,4 +27,4 @@ Users can send messages to each other in real time using STOMP WebSockets. The b
 
 # Chat History and Message Persistence
 
-Chat messages are persisted in a database using Spring Data JPA, allowing users to view their chat history even after logging out and logging back in.
+Chat messages are persisted in a database using Mongo DB, allowing users to view their chat history even after logging out and logging back in.
