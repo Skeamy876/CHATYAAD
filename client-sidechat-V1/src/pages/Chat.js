@@ -40,11 +40,11 @@ const Chat = () => {
     },[]);
 
     const connect=()=>{
-        const socket = new SockJS(testUrl);
+        const socket = new SockJS(serverurl);
         stompClient = over(socket);
         stompClient.connect({},function(frame){
             stompClient.debug("Connected: " + frame);
-            stompClient.subscribe('/chatRoom/public', onMessageRecieved);
+            stompClient.subscribe('chatRoom/public', onMessageRecieved);
             onConnected();
         }); 
     }
@@ -55,12 +55,12 @@ const Chat = () => {
             Users.push(User.username);
             setUsers([...Users])
         }
-        stompClient.send("/chatapp/chat.register", {},JSON.stringify({sender: User.username, type:"JOIN", timeStamp: getTime()})); 
+        stompClient.send("chatapp/chat.register", {},JSON.stringify({sender: User.username, type:"JOIN", timeStamp: getTime()})); 
     }
   
     const onSendChatMessage=()=>{
         if (stompClient) {
-            stompClient.send("/chatapp/chat.send", {}, JSON.stringify(sendMessage));
+            stompClient.send("chatapp/chat.send", {}, JSON.stringify(sendMessage));
         } 
     }
 

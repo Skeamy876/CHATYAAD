@@ -20,9 +20,15 @@ const Login = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        axios.post("http://localhost:8080/api/v1/chat/login-user",{
+        axios.post(`${serverurl}api/v1/chat/login-user`,{
            username: FormData.username,
            password:FormData.password
+        },{
+            headers: {
+                "Access-Control-Allow-Headers" : "Content-Type",
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
+            }
         })
         .then(res=>{
             if (res.status === 200) {

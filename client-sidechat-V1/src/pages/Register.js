@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
+    const serverurl= 'http://chatspringapp-env-2.eba-hyskc2i5.us-east-1.elasticbeanstalk.com/'
     const [FormData, setFormData] = useState({
         username: '',
         password: '',
@@ -27,7 +28,7 @@ const Register = () => {
     const handleSubmit = event => {
         event.preventDefault();
         validate();
-        axios.post("http://localhost:8080/api/v1/chat/register-save",{
+        axios.post(`${serverurl}api/v1/chat/register-save`,{
             username: FormData.username,
             password: FormData.password
         } )
