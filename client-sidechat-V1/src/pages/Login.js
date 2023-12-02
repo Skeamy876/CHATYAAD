@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom';
 
 
 const Login = () => {
+    const testUrl = 'http://localhost:8080/connectpoint'
+    const serverurl= 'http://chatspringapp-env-2.eba-hyskc2i5.us-east-1.elasticbeanstalk.com/'
     const [FormData, setFormData] = useState({
         username: '',
         password: '',

@@ -4,11 +4,41 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1f9f6fac-3270-49f7-be6b-d59d860a8571" name="Changes" comment="" />
+    <list default="true" id="1f9f6fac-3270-49f7-be6b-d59d860a8571" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server-chat/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Server-chat/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-sidechat/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-sidechat/Dockerfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-sidechat/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-sidechat/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-sidechat/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-sidechat/public/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-sidechat/public/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-sidechat/public/logo192.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-sidechat/public/logo512.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-sidechat/public/manifest.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-sidechat/public/robots.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-sidechat/src/App.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-sidechat/src/App.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-sidechat/src/App.test.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-sidechat/src/Components/Logout.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-sidechat/src/Components/Navbar.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-sidechat/src/index.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-sidechat/src/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-sidechat/src/logo.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-sidechat/src/pages/Chat.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-sidechat/src/pages/Login.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-sidechat/src/pages/Register.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-sidechat/src/reportWebVitals.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-sidechat/src/setupTests.js" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="2" />
   </component>
   <component name="ProjectId" id="2LybFIk271vWUAvkrojGkLIKbNj" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -16,13 +46,13 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;
   }
-}]]></component>
+}</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -32,6 +62,10 @@
       <option name="presentableId" value="Default" />
       <updated>1676846164423</updated>
       <workItem from="1676846165527" duration="671000" />
+      <workItem from="1677615405120" duration="18000" />
+      <workItem from="1677849511402" duration="7000" />
+      <workItem from="1678914653781" duration="45000" />
+      <workItem from="1698281585531" duration="8000" />
     </task>
     <servers />
   </component>

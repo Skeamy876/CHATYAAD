@@ -5,6 +5,8 @@ import {over} from 'stompjs';
 
 let stompClient = null;
 const Chat = () => {   
+    const testUrl = 'http://localhost:8080/connectpoint'
+    const serverurl= 'http://chatspringapp-env-2.eba-hyskc2i5.us-east-1.elasticbeanstalk.com/'
     const[User, setUser] = useState({
         username:" ",
         message: " ",
@@ -38,7 +40,7 @@ const Chat = () => {
     },[]);
 
     const connect=()=>{
-        const socket = new SockJS('http://localhost:8080/connectpoint');
+        const socket = new SockJS(testUrl);
         stompClient = over(socket);
         stompClient.connect({},function(frame){
             stompClient.debug("Connected: " + frame);
