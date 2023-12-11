@@ -5,7 +5,6 @@ import com.chapapplicationserver.chat.Collection.ChatRoom;
 import com.chapapplicationserver.chat.Collection.User;
 import com.chapapplicationserver.chat.Services.*;
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,9 +12,8 @@ import java.util.Collections;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "api/v1/chat")
-@CrossOrigin
 @AllArgsConstructor
+@RequestMapping(path = "api/v1/chat")
 public class chatapplicationController {
     private UserService userService;
     private ChatRoomService chatRoomService;

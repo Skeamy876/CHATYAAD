@@ -1,11 +1,12 @@
 import React, {useState} from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { Input, Button } from '@mui/material';
 
 
 
 const Login = () => {
-    const testUrl = 'http://localhost:8080/connectpoint'
+    const testUrl = 'http://localhost:8080/'
     const serverurl= 'http://chatspringapp-env-2.eba-hyskc2i5.us-east-1.elasticbeanstalk.com/'
     const [FormData, setFormData] = useState({
         username: '',
@@ -20,19 +21,12 @@ const Login = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        axios.post(`${serverurl}api/v1/chat/login-user`,{
+        axios.post(`${testUrl}api/v1/chat/login-user`,{
            username: FormData.username,
            password:FormData.password
-        },{
-            headers: {
-                "Access-Control-Allow-Headers" : "Content-Type",
-                "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
-            }
         })
         .then(res=>{
             if (res.status === 200) {
-                
                 localStorage.setItem("username",FormData.username);
                 navigate("/chatapp");  
             }
@@ -44,35 +38,35 @@ const Login = () => {
   
 
     };
-   
-    
+ 
     return (
-        <div>
+    <div>
         <div className="container">
-        <h1 className="login-header">Login</h1>
-            <form onSubmit={handleSubmit}>
-                <div className="form-group"style={{width: 800}}>
-                    <div className="input-group mb-3" >
-                        <span className="input-group-text" id="basic-addon1">Username</span>
-                        <input type="text" 
-                        className="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" 
-                        name='username'
-                        onChange={handleChange}
-                        required/>
-                    </div>
-                    <div className="input-group mb-3">
-                        <span className="input-group-text" id="basic-addon1">Password</span>
-                        <input type="Password" className="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1" 
-                        name='password'
-                        onChange={handleChange}
-                        required/>
-                    </div>
-                    <button type="submit" className="btn btn-outline-success">Login</button>
+            <div className="row justify-content-center">
+                <div className="col-lg-6">
+                    <h1 className="login-header">Login</h1>
+                    <form className="needs-validation" onSubmit={handleSubmit}>
+                        <div className="mb-3">
+                            <label htmlFor="username" className="form-label">Username</label>
+                            <input type="text" className="form-control" id="username" name="username" value={FormData.username} onChange={handleChange} required/>
+                        </div>
+                        <div className="mb-3">
+                            <label htmlFor="password" className="form-label">Password</label>
+                            <input type="password" className="form-control" id="password" name="password" value={FormData.password} onChange={handleChange} required/>
+                        </div>
+                        <div className="mb-3">
+                            <Button 
+                              variant='contained'
+                              color='success'
+                              onClick={handleSubmit}
+                              >Login</Button>
+                        </div>
+                    </form>
                 </div>
-            </form> 
+            </div>
         </div>
 
-        </div>
+     </div>
         
     );
 };

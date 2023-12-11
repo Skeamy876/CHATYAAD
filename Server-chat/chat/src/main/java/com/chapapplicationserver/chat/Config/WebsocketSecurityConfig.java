@@ -26,9 +26,6 @@ public class WebsocketSecurityConfig implements WebSocketMessageBrokerConfigurer
     @Autowired
     private ApplicationEventPublisher context;
 
-
-
-
     @Override
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
         argumentResolvers.add(new AuthenticationPrincipalArgumentResolver());

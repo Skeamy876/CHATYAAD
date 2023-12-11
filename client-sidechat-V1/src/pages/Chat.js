@@ -5,7 +5,7 @@ import {over} from 'stompjs';
 
 let stompClient = null;
 const Chat = () => {   
-    const testUrl = 'http://localhost:8080/connectpoint'
+    const testUrl = 'http://localhost:8080/connectpoint/'
     const serverurl= 'http://chatspringapp-env-2.eba-hyskc2i5.us-east-1.elasticbeanstalk.com/'
     const[User, setUser] = useState({
         username:" ",
@@ -40,7 +40,7 @@ const Chat = () => {
     },[]);
 
     const connect=()=>{
-        const socket = new SockJS(serverurl);
+        const socket = new SockJS(testUrl);
         stompClient = over(socket);
         stompClient.connect({},function(frame){
             stompClient.debug("Connected: " + frame);
@@ -73,6 +73,7 @@ const Chat = () => {
         let message = JSON.parse(payload.body);
         chatMessages.push(message);
         setChatMessages([...chatMessages]);
+        console.log(chatMessages)
     };
 
     const handleChange = (e) => {
@@ -110,77 +111,66 @@ const Chat = () => {
     let colorForCurrentUser = getRandomColor();
 
 
-    
-
     console.log(chatMessages)
 
-    return (
-        <>
-            <div>
-                {!User.conected? 
-                <div className="container text-center mt-5">
-                    <h1>Welcome to the ChatYaad</h1>
-                    <p>Select chat from drop down then, Click on the button below to connect to the Chat Room</p>
-                    <select className="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
-                        <option defaultValue={" "}> </option>
-                        <option value="1">Room one</option>
-                        <option value="2">Room Two</option>
-                        <option value="3">Room Three</option>
-                    </select>
-                    
-                    <button className="btn btn-primary btn-lg fixed-bottom" onClick={connect}>Connect</button>
-                </div>
-                :
-                    <div className="area-container">                
-                        <div className="chat-container">
-                            <div className="chatRoomHead text-bg-dark">
-                                    <h1 className="chatRoom_Header">ChatRoom</h1>
-                                    <ul>{Users.map((user,index)=><li key={index} className=" p-1"  style={{display:"inline"}}> {user} </li>)}</ul>
-                                </div>
-                                <div className="chatRoom_Messages"ref={messageListRef} >
-                                    <div className="card messsage-list" >
-                                        <ul className="list-group list-group-flush">
-                                            {JoinMessages.map((message, index)=>(
-                                                <li key={index} className="list-group-item"> {message.sender} has joined the chat</li> 
-                                            ))}
-                                        {AllChatMessages.map((message, index) => (
-                                            <li key={index} className="list-group-item p-3">
-                                                {message.sender !== User.username && (
-                                                    <div id="author" style={{ color: getRandomColor() }}>
-                                                        {message.sender}
-                                                    </div>
-                                                    )}
-                                                    {message.sender === User.username && (
-                                                    <div id="author" style={{ color: colorForCurrentUser }}>
-                                                        {message.sender}
-                                                    </div> 
-                                                    )} :
-                                                {message.content}
-                                            </li>
-                                        ))}
-                                        </ul>
-                                        {scrollToBottom()}
-                                    </div>
-                                </div>
-                                <div className="chatRoom_Input">
-                                <input type="text" 
-                                    onChange={handleChange}  
-                                    onKeyDown={handleKeydown} 
-                                    placeholder="Type your message here..."/>
-                                    <button type="submit" 
-                                    onClick={onSendChatMessage}>Send</button>                  
-                                </div>
-                            </div>
-                        </div>
-                }
-    
-                    </div>
         
-        </>
     
         
             
         
+    return (
+    <>
+        <div>
+            {!User.conected ? 
+            <div className="container text-center mt-5">
+                <h1>Welcome to the ChatYaad</h1>
+                <p>Select a chat room from the dropdown, then click on the button below to connect to the Chat Room</p>
+                <select className="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                    <option defaultValue={" "}>Select a room...</option>
+                    <option value="1">Room one</option>
+                    {/* Add more options here */}
+                </select>
+                
+                <button className="btn btn-primary btn-lg fixed-bottom" onClick={connect}>Connect</button>
+            </div>
+            :
+            <div className="area-container">                
+                <div className="chat-container">
+                    <div className="chatRoomHead text-bg-dark">
+                        <h1 className="chatRoom_Header">ChatRoom</h1>
+                        <ul>{Users.map((user,index)=><li key={index} className=" p-1"  style={{display:"inline"}}> {user} </li>)}</ul>
+                    </div>
+                    <div className="chatRoom_Messages" ref={messageListRef}>
+                        <div className="card message-list">
+                            <ul className="list-group list-group-flush">
+                                {JoinMessages.map((message, index)=>(
+                                    <li key={index} className="list-group-item"> {message.sender} has joined the chat</li> 
+                                ))}
+                                {AllChatMessages.map((message, index) => (
+                                    <li key={index} className="list-group-item p-3">
+                                        <div id="author" style={{ color: message.sender === User.username ? colorForCurrentUser : getRandomColor() }}>
+                                            {message.sender}
+                                        </div> :
+                                        {message.content}
+                                    </li>
+                                ))}
+                            </ul>
+                            {scrollToBottom()}
+                        </div>
+                    </div>
+                    <div className="chatRoom_Input">
+                        <input type="text" 
+                            onChange={handleChange}  
+                            onKeyDown={handleKeydown} 
+                            placeholder="Type your message here..."/>
+                        <button type="submit" 
+                        onClick={onSendChatMessage}>Send</button>                  
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
+    </>
     );
 };
 

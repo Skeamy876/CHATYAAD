@@ -10,12 +10,13 @@ import Navbar from './Components/Navbar';
 function App() {
   return (
     <>
-      <Navbar/>
+     
       <div className='Container'>
+      <Navbar/>
         <Routes>
-          <Route path="/Register" element={<Register />} />
+          <Route path="/" element={<Register />} />
           <Route path="/chatapp" element={<Chat />} />
-          <Route path="/" element={<Login />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
       </div>
     </>
