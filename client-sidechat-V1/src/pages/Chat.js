@@ -6,7 +6,7 @@ import {over} from 'stompjs';
 let stompClient = null;
 const Chat = () => {   
     const testUrl = 'http://localhost:8080/'
-    const serverurl= 'https://chatyaad-server.onrender.com/'
+    const serverurl= 'https://chatyaad-production.up.railway.app/'
     const[User, setUser] = useState({
         username:" ",
         message: " ",
