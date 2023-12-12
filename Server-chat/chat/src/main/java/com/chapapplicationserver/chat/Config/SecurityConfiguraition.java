@@ -40,7 +40,7 @@ public class SecurityConfiguraition {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("https://chatyaad-full-stack-chat-application-9u0r9rf9q-ackeems-projects.vercel.app/")); // vercel server
+        configuration.setAllowedOrigins(Arrays.asList("https://chatyaad-full-stack-chat-application-ackeems-projects.vercel.app/")); // vercel server
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList("Authorization", "Cache-Control", "Content-Type"));
         configuration.setAllowCredentials(true);
