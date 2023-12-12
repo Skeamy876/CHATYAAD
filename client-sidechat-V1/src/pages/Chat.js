@@ -1,4 +1,4 @@
-import React,{useEffect, useRef, useState} from 'react';
+import React,{useEffect, useState} from 'react';
 import SockJS from 'sockjs-client';
 import {over} from 'stompjs';
 
@@ -28,11 +28,13 @@ const Chat = () => {
         type:" ",
     });
     const [Users,setUsers] = useState([])
-    const messageListRef = useRef(null);
+    const [avatar, setAvatar] =useState(null);
     const [inputValue, setInputValue] = useState('');
 
 
     useEffect(()=>{
+        const newAvatar = getRandomAvatar();
+        setAvatar(newAvatar);
       
         setUser({
             username:localStorage.getItem('username'),
@@ -41,11 +43,11 @@ const Chat = () => {
     },[]);
 
     const connect=()=>{
-        const socket = new SockJS(`${testUrl}connectpoint/`);
+        const socket = new SockJS(`${testUrl}connectpoint`);
         stompClient = over(socket);
         stompClient.connect({},function(frame){
             stompClient.debug("Connected: " + frame);
-            stompClient.subscribe('chatRoom/public', onMessageRecieved);
+            stompClient.subscribe('/chatRoom/public', onMessageRecieved);
             onConnected();
         }); 
     }
@@ -56,12 +58,12 @@ const Chat = () => {
             Users.push(User.username);
             setUsers([...Users])
         }
-        stompClient.send("chatapp/chat.register", {},JSON.stringify({sender: User.username, type:"JOIN", timeStamp: getTime()})); 
+        stompClient.send("/chatapp/chat.register", {},JSON.stringify({sender: User.username, type:"JOIN", timeStamp: getTime()})); 
     }
   
     const onSendChatMessage=()=>{
         if (stompClient) {
-            stompClient.send("chatapp/chat.send", {}, JSON.stringify(sendMessage));
+            stompClient.send("/chatapp/chat.send", {}, JSON.stringify(sendMessage));
             setSendMessage(prevMessage => ({ ...prevMessage, content: '' }));
             setInputValue('');
         } 
@@ -74,7 +76,6 @@ const Chat = () => {
 
     const onMessageRecieved=(payload)=>{
         let message = JSON.parse(payload.body);
-        console.log("This is onMessageRecieved")
         console.log(message);
         chatMessages.push(message);
         setChatMessages([...chatMessages]);
@@ -82,7 +83,8 @@ const Chat = () => {
 
     const handleChange = (e) => {
         setInputValue(e.target.value);
-        setSendMessage(prevMessage => ({ ...prevMessage, 
+        setSendMessage(prevMessage => ({ ...prevMessage,
+            sender: User.username,
             content: e.target.value,
             timestamp: getTime(),
             type: "CHAT", 
@@ -93,12 +95,6 @@ const Chat = () => {
             onSendChatMessage();
         }
     }
-    const scrollToBottom = () => {
-        if (messageListRef.current) {
-          messageListRef.current.scrollTop = messageListRef.current.scrollHeight;
-        }
-    };
-
 
     const avatars = [
         "https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp",
@@ -118,6 +114,7 @@ const Chat = () => {
     let JoinMessages = chatMessages.filter(message=>message.type ==="JOIN");
     let AllChatMessages = chatMessages.filter(message => message.type ==="CHAT");
 
+    console.log(chatMessages)
         
     return (
     <>
@@ -149,9 +146,9 @@ const Chat = () => {
                                 <div className="card-body">
                                     {JoinMessages.map((message, index) => {
                                         return (
-                                            <div className="d-flex flex-row justify-content-start mb-4" key={index}>
-                                                <img src={getRandomAvatar()}
-                                                    alt="avatar 1" style={{width: '45px', height: '100%'}} />
+                                            <div className="d-flex flex-row justify-content-center mb-4" key={index}>
+                                                <img src={avatar}
+                                                    alt="avatar 1" style={{width: '40px', height: '100%'}} />
                                                 <div className="p-3 ms-3" style={{borderRadius: '15px', backgroundColor: 'rgba(57, 192, 237,.2)'}}>
                                                     <p className="small mb-0">{message.sender} joined the chat</p>
                                                 </div>
@@ -161,26 +158,25 @@ const Chat = () => {
 
                                     {AllChatMessages.map((message, index) => {
                                         return (
-                                            <div className="d-flex flex-row justify-content-start mb-4" key={index}>
-                                                <img src={getRandomAvatar()}
-                                                    alt="avatar 1" style={{width: '45px', height: '100%'}} />
-                                                    <p>{message.sender}</p>
-                                                <div className="p-3 ms-3" style={{borderRadius: '15px', backgroundColor: 'rgba(57, 192, 237,.2)'}}>
-                                                    <p className="small mb-0">{message.content}</p>
+                                            message.sender === User.username ?
+                                                <div className="d-flex flex-row justify-content-end mb-4" key={index}>
+                                                    <div className="p-3 ms-3" style={{borderRadius: '15px', backgroundColor: 'rgba(57, 192, 237,.2)'}}>
+                                                        <p className="small mb-0">{message.content}</p>
+                                                    </div>
+                                                    <img src={avatar}
+                                                        alt="avatar 1" style={{width: '40px', height: '100%'}} />
                                                 </div>
-                                            </div>
+                                            :
+                                                <div className="d-flex flex-row justify-content-start mb-4" key={index}>
+                                                    <div className="p-3 me-3 border flex-flex-column-reverse" style={{borderRadius: '15px', backgroundColor: '#fbfbfb'}}>
+                                                        <p className="small mb-0">{message.content}</p>
+                                                    </div>
+                                                    <img src={avatar}
+                                                      alt="avatar 1" style={{width: '40px', height: '100%'}} />
+                                                </div> 
+                                                   
                                         );
-                                    })}
-
-                                    {/* <div className="d-flex flex-row justify-content-end mb-4">
-                                        <div className="p-3 me-3 border" style={{borderRadius: '15px', backgroundColor: '#fbfbfb'}}>
-                                            <p className="small mb-0">Thank you, I really like your product.</p>
-                                        </div>
-                                        <img src={getRandomAvatar()}
-                                            alt="avatar 1" style={{width: '45px', height: '100%'}} />
-                                    </div> */}
-                                    {scrollToBottom()}
-                                
+                                    })}                
                                     <div className="form-outline">
                                         <textarea 
                                         className="form-control" 
@@ -197,9 +193,6 @@ const Chat = () => {
                     </div>
                 </div>
             </section>
-              
-          
-
         }
         </div>
     </>
