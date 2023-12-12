@@ -13,6 +13,7 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
+@CrossOrigin(origins = "https://chatyaad.onrender.com", maxAge = 3600)
 @RequestMapping(path = "api/v1/chat")
 public class chatapplicationController {
     private UserService userService;
