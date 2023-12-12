@@ -29,6 +29,7 @@ const Chat = () => {
     });
     const [Users,setUsers] = useState([])
     const [avatar, setAvatar] =useState(null);
+    
     const [inputValue, setInputValue] = useState('');
 
 
@@ -111,11 +112,7 @@ const Chat = () => {
         return avatars[Math.floor(Math.random() * avatars.length)];
     };
 
-    let JoinMessages = chatMessages.filter(message=>message.type ==="JOIN");
-    let AllChatMessages = chatMessages.filter(message => message.type ==="CHAT");
-
-    console.log(chatMessages)
-        
+    console.log(chatMessages)  
     return (
     <>
         <div>
@@ -140,28 +137,27 @@ const Chat = () => {
                                     className="card-header d-flex justify-content-between align-items-center p-3 bg-dark text-white border-bottom-0"
                                     style={{borderTopLeftRadius: '15px', borderTopRightRadius: '15px'}}>
                                     <i className="fas fa-angle-left"></i>
-                                    <p className="mb-0 fw-bold">Chat Room</p>
-                                    <i className="fas fa-times"></i>
+                                    <p className="mb-0 fw-bold">Chat Room</p>   
                                 </div>
                                 <div className="card-body">
-                                    {JoinMessages.map((message, index) => {
+                                    {chatMessages.map((message, index) => {
                                         return (
-                                            <div className="d-flex flex-row justify-content-center mb-4" key={index}>
-                                                <img src={avatar}
-                                                    alt="avatar 1" style={{width: '40px', height: '100%'}} />
-                                                <div className="p-3 ms-3" style={{borderRadius: '15px', backgroundColor: 'rgba(57, 192, 237,.2)'}}>
-                                                    <p className="small mb-0">{message.sender} joined the chat</p>
+                                            message.type === "JOIN" ?
+                                                <div className="d-flex flex-row justify-content-center mb-4" key={index}>
+                                                    <img src={avatar}
+                                                        alt="avatar 1" style={{width: '40px', height: '100%'}} />
+                                                    <div className="p-3 ms-3" style={{borderRadius: '15px', backgroundColor: 'rgba(57, 192, 237,.2)'}}>
+                                                        <p className="small text-end mb-0">{message.sender} joined the chat</p>
+                                                        <p className="small text-end mb-0">{message.timestamp}</p>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        );
-                                    })}
-
-                                    {AllChatMessages.map((message, index) => {
-                                        return (
+                                            :
                                             message.sender === User.username ?
                                                 <div className="d-flex flex-row justify-content-end mb-4" key={index}>
                                                     <div className="p-3 ms-3" style={{borderRadius: '15px', backgroundColor: 'rgba(57, 192, 237,.2)'}}>
-                                                        <p className="small mb-0">{message.content}</p>
+                                                        <p className=" mb-0">{message.content}</p>
+                                                        <p className="text-muted small font-italic mb-0">{message.sender}</p>
+                                                        <p className="text-muted small font-italic text-end mb-0">{message.timestamp}</p>
                                                     </div>
                                                     <img src={avatar}
                                                         alt="avatar 1" style={{width: '40px', height: '100%'}} />
@@ -169,12 +165,13 @@ const Chat = () => {
                                             :
                                                 <div className="d-flex flex-row justify-content-start mb-4" key={index}>
                                                     <div className="p-3 me-3 border flex-flex-column-reverse" style={{borderRadius: '15px', backgroundColor: '#fbfbfb'}}>
-                                                        <p className="small mb-0">{message.content}</p>
+                                                        <p className=" mb-0">{message.content}</p>
+                                                        <p className="text-muted small font-italic mb-0">{message.sender}</p>
+                                                        <p className="text-muted small font-italic text-end mb-0">{message.timestamp}</p>
                                                     </div>
                                                     <img src={avatar}
                                                       alt="avatar 1" style={{width: '40px', height: '100%'}} />
-                                                </div> 
-                                                   
+                                                </div>   
                                         );
                                     })}                
                                     <div className="form-outline">
