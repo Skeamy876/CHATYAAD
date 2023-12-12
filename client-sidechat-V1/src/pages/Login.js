@@ -7,7 +7,7 @@ import { Input, Button } from '@mui/material';
 
 const Login = () => {
     const testUrl = 'http://localhost:8080/'
-    const serverurl= 'http://chatspringapp-env-2.eba-hyskc2i5.us-east-1.elasticbeanstalk.com/'
+    const serverurl= 'https://chatyaad-server.onrender.com/'
     const [FormData, setFormData] = useState({
         username: '',
         password: '',
@@ -21,7 +21,7 @@ const Login = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        axios.post(`${testUrl}api/v1/chat/login-user`,{
+        axios.post(`${serverurl}api/v1/chat/login-user`,{
            username: FormData.username,
            password:FormData.password
         })
