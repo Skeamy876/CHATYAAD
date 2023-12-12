@@ -94,7 +94,8 @@ const Register = () => {
                                 Register
                             </Button>
 
-                            <p className="text-muted small font-italic mb-0">Server sleeps until request is made. Repeatedly click until operation executes</p>
+                            <p className="text-muted small font-italic mb-0">Server sleeps until request is made. This is based on a free deploymet configuration as this is a demo project. 
+                            Please execute one action then and the wait a minute or two then the server will be spun up</p>
                         </div>
                     </form>
                 </div>
