@@ -60,6 +60,8 @@ const Login = () => {
                               color='success'
                               onClick={handleSubmit}
                               >Login</Button>
+                            <p className="text-muted small font-italic mb-0">Server sleeps until request is made. Repeatedly click until operation executes</p>
+
                         </div>
                     </form>
                 </div>
