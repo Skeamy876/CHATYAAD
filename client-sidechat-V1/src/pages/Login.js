@@ -24,7 +24,13 @@ const Login = () => {
         axios.post(`${serverurl}api/v1/chat/login-user`,{
            username: FormData.username,
            password:FormData.password
-        })
+        },{
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        }
+        
+        )
         .then(res=>{
             if (res.status === 200) {
                 localStorage.setItem("username",FormData.username);

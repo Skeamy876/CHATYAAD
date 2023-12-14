@@ -13,7 +13,6 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
-@CrossOrigin(origins = {"http://localhost:3000","https://chatyaad-frontend-production.up.railway.app/"},allowedHeaders = "*")
 @RequestMapping(path = "api/v1/chat")
 public class chatapplicationController {
     private UserService userService;

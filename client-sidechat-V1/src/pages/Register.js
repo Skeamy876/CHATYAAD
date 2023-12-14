@@ -36,7 +36,12 @@ const Register = () => {
         axios.post(`${serverurl}api/v1/chat/register-save`,{
             username: FormData.username,
             password: FormData.password
-        } )
+        },{
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        } 
+        )
         .then(res => {
             console.log(res.status);
             if (res.status === 200) {
