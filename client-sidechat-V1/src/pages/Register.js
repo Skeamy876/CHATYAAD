@@ -44,7 +44,7 @@ const Register = () => {
         )
         .then(res => {
             console.log(res.status);
-            if (res.status === 200) {
+            if (res.status === 201) {
                 navigate('/login');
             }
             
