@@ -3,6 +3,9 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
+    const testUrl = 'http://localhost:8080/'
+    const serverurl= 'https://chatyaad-production.up.railway.app/'
+    
     const [FormData, setFormData] = useState({
         username: '',
         password: '',
