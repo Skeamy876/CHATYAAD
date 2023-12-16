@@ -1,4 +1,4 @@
-import React,{useEffect, useState} from 'react';
+import React,{useEffect, useState, useRef} from 'react';
 import SockJS from 'sockjs-client';
 import {over} from 'stompjs';
 
@@ -7,6 +7,7 @@ let stompClient = null;
 const Chat = () => {   
     const testUrl = 'http://localhost:8080/'
     const serverurl= 'https://chatyaad-production.up.railway.app/'
+    const cardBodyRef = useRef(null);
     const[User, setUser] = useState({
         username:" ",
         message: " ",
@@ -41,6 +42,12 @@ const Chat = () => {
             username:localStorage.getItem('username'),
             conected: false,
         });
+
+        const {current} = cardBodyRef;
+        if (current) {
+            current.scroolIntoView({block: 'end', behavior: 'smooth'});
+        }
+
     },[]);
 
     const connect=()=>{
@@ -134,12 +141,12 @@ const Chat = () => {
                         <div className="col-md-8 col-lg-6 col-xl-12">
                             <div className="card" id="chat1" style={{borderRadius: "15px"}}>
                                 <div
-                                    className="card-header d-flex justify-content-between align-items-center p-3 bg-dark text-white border-bottom-0"
+                                    className="card-header d-flex justify-content-center align-items-center  p-3 bg-dark text-white border-bottom-0"
                                     style={{borderTopLeftRadius: '15px', borderTopRightRadius: '15px'}}>
                                     <i className="fas fa-angle-left"></i>
                                     <p className="mb-0 fw-bold">Chat Room</p>   
                                 </div>
-                                <div className="card-body">
+                                <div className="card-body" ref={cardBodyRef} style={{overflow: 'auto', height:'300px'}}>
                                     {chatMessages.map((message, index) => {
                                         return (
                                             message.type === "JOIN" ?
